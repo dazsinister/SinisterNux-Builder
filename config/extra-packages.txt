@@ -1,0 +1,3 @@
+# Extra packages for SinisterNux Alpha 0.1
+zsh
+git
