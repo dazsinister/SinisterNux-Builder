@@ -1,0 +1,14 @@
+/build/
+*.iso
+*.sha256
+*.log
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.key
+*.pem
+*.p12
+*.qcow2
+*.vdi
+*.vmdk
+.env
