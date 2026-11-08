@@ -1,0 +1,13 @@
+[Unit]
+Description=Create disposable SinisterNux KDE live account
+Before=plasmalogin.service
+After=systemd-user-sessions.service
+ConditionPathExists=!/home/sinister/.sinisternux-live-account-ready
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/sinisternux-create-live-user
+RemainAfterExit=yes
+
+[Install]
+WantedBy=graphical.target
