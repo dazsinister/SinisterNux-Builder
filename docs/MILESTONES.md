@@ -13,7 +13,7 @@
 - [x] `sinister-info` displays SinisterNux branding and completes without the earlier missing-`hostname` failure after rebuilding with source fix `fed56b0` (user confirmed retest).
 - [x] `/etc/os-release` reports SinisterNux (photo-verified).
 - [x] Guest network and DNS work (`ping -c 3 archlinux.org`, 3/3 received, 0% loss; photo-verified).
-- [ ] ISO SHA-256 verifies (not yet confirmed).
+- [x] ISO SHA-256 verifies (user ran `make verify` on the rebuilt ISO and confirmed it passed before launching the test VM).
 - [ ] Build revision and `pacman -Q archiso` recorded (not yet recorded).
 
 No milestone is marked complete without actual VM verification.
@@ -24,4 +24,8 @@ On November 7, 2026 local time (ISO image identifies itself as `0.1.0_alpha_2026
 
 ## Fixed-image retest
 
-On November 8, 2026 local date, the user confirmed that the **rebuilt Alpha 0.1 image** booted and its `sinister-info`, OS identity, and networking checks passed. The prior `hostname` error is considered fixed in this tested image. SHA-256 verification of the rebake and exact build-source/archiso package version are not independently confirmed, so the release checklist remains open for these two administrative checks.
+On November 8, 2026 local date, the user confirmed that the **rebuilt Alpha 0.1 image** booted and its `sinister-info`, OS identity, and networking checks passed. The prior `hostname` error is considered fixed in this tested image. SHA-256 verification of the rebuilt image was confirmed by the user. The exact build-source commit and installed archiso package version have not yet been recorded; this remains an administrative follow-up.
+
+## Checksum verification confirmation
+
+The user confirmed running `make verify` on the rebuilt Alpha 0.1 ISO before booting the second test VM; checksum verification passed. The generated checksum file and ISO remain on the user's Unraid/build storage, not committed to GitHub. This closes the checksum acceptance item; source provenance recording is still pending.
