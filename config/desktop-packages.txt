@@ -1,0 +1,18 @@
+# SinisterNux Alpha 0.2 — graphical live ISO
+# plasma-meta includes plasma-login-manager on current Arch.
+plasma-meta
+plasma-login-manager
+konsole
+dolphin
+kio-extras
+networkmanager
+pipewire
+pipewire-alsa
+pipewire-pulse
+wireplumber
+mesa
+vulkan-swrast
+qt6-wayland
+xorg-xwayland
+ttf-dejavu
+ttf-liberation
