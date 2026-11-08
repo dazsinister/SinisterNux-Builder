@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+printf '\n  === SinisterNux Alpha 0.1 ===\n'
+printf '  Arch-derived development live image; NOT a full installer.\n\n'
+printf 'Kernel: '; uname -r
+printf 'Hostname: '; hostname
+printf 'Identity: '; sed -n 's/^PRETTY_NAME=//p' /etc/os-release | head -n 1
+printf '\nTests: ip a | ping -c 3 archlinux.org\n\n'
