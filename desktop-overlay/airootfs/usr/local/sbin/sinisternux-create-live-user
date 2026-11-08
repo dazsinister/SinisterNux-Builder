@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+if ! id -u sinister >/dev/null 2>&1; then
+  useradd -m -U -s /bin/bash sinister
+fi
+# The user is intentionally passwordless on this disposable LIVE ISO.
+passwd -d sinister
+install -d -o sinister -g sinister /home/sinister
+touch /home/sinister/.sinisternux-live-account-ready
+chown sinister:sinister /home/sinister/.sinisternux-live-account-ready
