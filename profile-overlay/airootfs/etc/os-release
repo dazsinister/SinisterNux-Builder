@@ -1,0 +1,8 @@
+NAME="SinisterNux"
+PRETTY_NAME="SinisterNux Alpha 0.1 (Arch-based)"
+ID=sinisternux
+ID_LIKE=arch
+VERSION="0.1.0 Alpha"
+VERSION_ID="0.1.0"
+BUILD_ID="alpha-0.1"
+ANSI_COLOR="0;31"
