@@ -50,3 +50,21 @@ Never run installer or partitioning tools from this early live image on a valuab
 Local Git is our development workflow; GitHub is a remote copy and collaboration point, **not** cloud-based ISO compilation. Do not commit build output, signing keys, secrets, or VM disk files.
 
 Archiso references: [ArchWiki](https://wiki.archlinux.org/title/Archiso) · [mkarchiso manual](https://man.archlinux.org/man/mkarchiso.1.en).
+
+## Experimental Alpha 0.2 KDE branch
+
+`alpha-0.2-kde` now stages **a new graphical live ISO**. The code is untested on actual Archiso and Unraid VMs. Preserve the previous Alpha 0.1 ISO before starting.
+
+```bash
+cd ~/SinisterNux-Builder
+git pull --ff-only
+make check
+make prepare
+make iso
+make verify
+ls -lh build/out/*0.2*.iso
+```
+
+KDE Plasma, Plasma Login Manager, Konsole, Dolphin and Mesa's software-rendering fallback are staged on this branch. The live system is configured to create an ephemeral `sinister` account and automatically log into KDE. The development account intentionally has **no password** and should **never** be reused in an installed operating system. If graphical boot fails, use the Unraid VNC console's **Send Key** menu to reach another TTY and inspect `journalctl -b -u plasmalogin.service` and `journalctl -b -u sinister-nux-live-user.service` (correct unit: `sinisternux-live-user.service`).
+
+**Do not run `make clean` before preserving valuable ISOs**: it deletes generated build output.
