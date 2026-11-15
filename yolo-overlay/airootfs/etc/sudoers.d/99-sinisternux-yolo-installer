@@ -1,0 +1,2 @@
+# Live ISO only. Restrict passwordless escalation to the guarded preview launcher.
+sinister ALL=(root) NOPASSWD: /usr/local/bin/sinisternux-install-preview
