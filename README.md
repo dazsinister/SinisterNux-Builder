@@ -68,3 +68,22 @@ ls -lh build/out/*0.2*.iso
 KDE Plasma, Plasma Login Manager, Konsole, Dolphin and Mesa's software-rendering fallback are staged on this branch. The live system is configured to create an ephemeral `sinister` account and automatically log into KDE. The development account intentionally has **no password** and should **never** be reused in an installed operating system. If graphical boot fails, use the Unraid VNC console's **Send Key** menu to reach another TTY and inspect `journalctl -b -u plasmalogin.service` and `journalctl -b -u sinister-nux-live-user.service` (correct unit: `sinisternux-live-user.service`).
 
 **Do not run `make clean` before preserving valuable ISOs**: it deletes generated build output.
+
+## Experimental YOLO full-install preview branch
+
+**Branch:** `experiment/yolo-full-install` — this branch is a deliberately oversized, unverified **VM-only** experiment. It is **not a polished installer**.
+
+It combines the existing Alpha 0.2 Plasma live profile with a broad set of packages and a guided installer shortcut. The installer launches **upstream Archinstall** after you explicitly confirm the disk-risk warning. **Packages on the LIVE ISO do not automatically become packages in the installed system.** After installing into an empty disposable Unraid VM virtual disk, you must separately run the documented `scripts/yolo-postinstall.sh` from this Git checkout inside the installed VM.
+
+To build on the Arch Builder VM:
+
+```bash
+git fetch origin
+git switch --track origin/experiment/yolo-full-install
+make check
+make yolo-iso
+make yolo-verify
+ls -lh build/yolo-out/
+```
+
+Do not erase the Alpha 0.1 ISO or use your CachyOS PC or Unraid data disks as installation targets. Read [the YOLO build-and-install guide](docs/YOLO-FULL-INSTALL.md) before running it. This preview does not yet have a validated Calamares installer, installed Limine/dracut boot integration, automatic Btrfs snapshot rollback, or original Qt/QML tools.
