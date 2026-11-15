@@ -58,8 +58,8 @@ def prepare(source: Path = SOURCE, target: Path = TARGET) -> Path:
     sudoers_token = f'["{sudoers_path}"]="0:0:440"'
     if sudoers_token not in definition:
         definition, count = re.subn(
-            r"(?m)^file_permissions=\\(\\s*$",
-            lambda m: m.group(0) + "\\n" + sudoers_token,
+            r"(?m)^file_permissions=\(\s*$",
+            lambda m: m.group(0) + "\n" + sudoers_token,
             definition,
         )
         if count != 1:
