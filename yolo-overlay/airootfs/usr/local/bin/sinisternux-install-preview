@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# Experimental guided installer. NEVER partitions a disk itself.
+set -euo pipefail
+
+if (( EUID != 0 )); then
+  echo "Run this with sudo on the YOLO live image." >&2
+  exit 1
+fi
+if [[ ! -d /run/archiso ]]; then
+  echo "Refusing: this tool must run from the Archiso live environment." >&2
+  exit 1
+fi
+if ! systemd-detect-virt -q; then
+  echo "Refusing: first tests must happen in a virtual machine." >&2
+  exit 1
+fi
+if ! command -v archinstall >/dev/null; then
+  echo "archinstall is missing. ISO packaging failed." >&2
+  exit 1
+fi
+
+cat <<'EOF'
+==========================================================
+ SinisterNux YOLO — experimental Archinstall preview
+==========================================================
+This is NOT the finished SinisterNux installer.
+It starts upstream Arch's interactive guided installer.
+
+WARNING: Archinstall CAN ERASE THE DISK YOU SELECT.
+Select ONLY an EMPTY, disposable Unraid VM virtual disk.
+Never select or attach an Unraid storage disk or host drive.
+
+Recommended choices:
+  UEFI + Btrfs, KDE Plasma, NetworkManager, sudo user.
+  Use a supported bootloader for this initial install.
+  Do NOT manually replace the bootloader with Limine yet.
+
+After reboot into installed Arch, clone our GitHub project
+and run the REVIEWED scripts/yolo-postinstall.sh inside that VM.
+That step is separate and never performed automatically.
+
+EOF
+lsblk -o NAME,SIZE,TYPE,MODEL,MOUNTPOINTS
+echo
+read -r -p 'Type I-UNDERSTAND-THIS-CAN-ERASE-MY-VM-DISK to start archinstall: ' response
+if [[ "$response" != "I-UNDERSTAND-THIS-CAN-ERASE-MY-VM-DISK" ]]; then
+  echo "Cancelled. No disk changes made by this launcher."
+  exit 1
+fi
+exec archinstall
