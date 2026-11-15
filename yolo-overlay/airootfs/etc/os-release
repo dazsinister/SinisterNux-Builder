@@ -1,0 +1,8 @@
+NAME="SinisterNux"
+PRETTY_NAME="SinisterNux YOLO Full-Install Preview (Arch-based)"
+ID=sinisternux
+ID_LIKE=arch
+VERSION="0.9.0 Experimental YOLO"
+VERSION_ID="0.9.0"
+BUILD_ID="yolo-vm-only"
+ANSI_COLOR="0;31"
