@@ -53,6 +53,18 @@ def prepare(source: Path = SOURCE, target: Path = TARGET) -> Path:
         if count != 1:
             raise ProfileError(f"Expected one assignment for {key}, saw {count}")
     definition = add_executable_permission(definition, "/usr/local/bin/sinisternux-install-preview")
+    # sudo requires secure root-owned 0440 permissions on sudoers files.
+    sudoers_path = "/etc/sudoers.d/99-sinisternux-yolo-installer"
+    sudoers_token = f'["{sudoers_path}"]="0:0:440"'
+    if sudoers_token not in definition:
+        definition, count = re.subn(
+            r"(?m)^file_permissions=\\(\\s*$",
+            lambda m: m.group(0) + "\\n" + sudoers_token,
+            definition,
+        )
+        if count != 1:
+            raise ProfileError("Cannot apply sudoers file permissions")
+
     cfg.write_text(definition)
     pacman_conf = target / "pacman.conf"
     if not pacman_conf.is_file():
