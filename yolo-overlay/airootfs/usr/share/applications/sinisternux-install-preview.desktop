@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Install SinisterNux YOLO Preview
+GenericName=Experimental VM-Only Archinstall Launcher
+Comment=Guided Arch installer with explicit disposable-disk confirmation
+Exec=konsole -e sudo /usr/local/bin/sinisternux-install-preview
+Icon=system-software-install
+Terminal=false
+Categories=System;Settings;
+StartupNotify=false
