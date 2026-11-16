@@ -8,6 +8,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 from prepare_yolo import enable_multilib, prepare
 
 class YoloTests(unittest.TestCase):
+    def test_manifest_uses_wayland_not_removed_x11_session(self):
+        root = Path(__file__).resolve().parents[1]
+        manifest = (root / "config" / "yolo-packages.txt").read_text().splitlines()
+        names = [line.strip() for line in manifest if line.strip() and not line.startswith("#")]
+        self.assertNotIn("plasma-x11-session", names)
+        desktop = (root / "config" / "desktop-packages.txt").read_text().splitlines()
+        self.assertIn("xorg-xwayland", desktop)
+
     def test_enable_multilib(self):
         source = "[core]\nInclude = /etc/pacman.d/mirrorlist\n#[multilib]\n#Include = /etc/pacman.d/mirrorlist\n"
         result = enable_multilib(source)
