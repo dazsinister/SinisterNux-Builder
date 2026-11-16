@@ -33,7 +33,8 @@ bash-completion
 openssh
 
 # KDE desktop and access
-plasma-x11-session
+# Plasma 6.8 removed the standalone X11 session. Use Wayland + XWayland
+# (xorg-xwayland comes from config/desktop-packages.txt).
 plasma-systemmonitor
 discover
 ark
