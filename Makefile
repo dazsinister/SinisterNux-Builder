@@ -46,7 +46,7 @@ yolo-prepare: prepare
 yolo-iso: yolo-prepare
 	@command -v mkarchiso >/dev/null || { echo 'mkarchiso not found: install archiso in Arch VM' >&2; exit 1; }
 	@mkdir -p "$(ROOT)/build/yolo-out"
-	@sudo mkarchiso -v -w "$(ROOT)/build/yolo-work" -o "$(ROOT)/build/yolo-out" "$(ROOT)/build/yolo-profile"
+	@sudo mkarchiso -v -r -w "$(ROOT)/build/yolo-work-$(shell date +%s)" -o "$(ROOT)/build/yolo-out" "$(ROOT)/build/yolo-profile"
 	@$(PYTHON) "$(ROOT)/tools/hash_isos.py" create "$(ROOT)/build/yolo-out"
 	@echo 'Experimental YOLO ISO ready in build/yolo-out/'
 
